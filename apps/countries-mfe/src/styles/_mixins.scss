@@ -1,0 +1,200 @@
+@use 'variables' as v;
+
+// ── Card surface ──────────────────────────────────────────────────────────────
+@mixin card {
+  background: v.$surface;
+  border: 1px solid v.$border;
+  border-radius: v.$radius-card;
+  box-shadow: v.$shadow-md;
+  overflow: hidden;
+  transition: v.$transition-base;
+
+  &:hover {
+    box-shadow: v.$shadow-lg;
+  }
+}
+
+// ── Accent bar at top of card ────────────────────────────────────────────────
+@mixin accent-bar($color: v.$brand, $height: 4px) {
+  content: '';
+  display: block;
+  width: 100%;
+  height: #{$height};
+  background: $color;
+}
+
+// ── Brand gradient button ────────────────────────────────────────────────────
+@mixin btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1.125rem;
+  background: linear-gradient(135deg, v.$brand 0%, #2a1de8 100%);
+  color: #fff;
+  font-family: v.$font-display;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: v.$radius-btn;
+  cursor: pointer;
+  transition: v.$transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background: linear-gradient(135deg, v.$brand-dark 0%, v.$brand 100%);
+    box-shadow: 0 4px 14px rgba(v.$brand, 0.35);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+// ── Ghost / outlined button ──────────────────────────────────────────────────
+@mixin btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  color: v.$brand;
+  font-family: v.$font-body;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1.5px solid v.$border;
+  border-radius: v.$radius-btn;
+  cursor: pointer;
+  transition: v.$transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background: v.$surface-2;
+    border-color: v.$brand;
+  }
+
+  &:active {
+    background: v.$brand-light;
+  }
+}
+
+// ── Danger button ────────────────────────────────────────────────────────────
+@mixin btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  color: v.$danger;
+  font-family: v.$font-body;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1.5px solid #fecaca;
+  border-radius: v.$radius-btn;
+  cursor: pointer;
+  transition: v.$transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background: v.$danger-light;
+    border-color: v.$danger;
+  }
+}
+
+// ── Responsive grid with auto-fill ──────────────────────────────────────────
+@mixin grid-responsive($min: 260px, $gap: 1.25rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, 1fr));
+  gap: $gap;
+}
+
+// ── Skeleton pulse animation ─────────────────────────────────────────────────
+@keyframes skeleton-pulse {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    #e8eaf2 25%,
+    #f4f5fa 50%,
+    #e8eaf2 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-pulse 1.6s ease infinite;
+  border-radius: 0.375rem;
+}
+
+// ── Page fade-in animation ───────────────────────────────────────────────────
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@mixin page-fade-in($duration: 0.3s) {
+  animation: page-fade-in $duration ease forwards;
+}
+
+// ── Modal overlay ────────────────────────────────────────────────────────────
+@mixin modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 74, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+// ── Input base ───────────────────────────────────────────────────────────────
+@mixin input-base {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: v.$surface;
+  border: 1.5px solid v.$border;
+  border-radius: v.$radius-input;
+  font-family: v.$font-body;
+  font-size: 0.9rem;
+  color: v.$text-primary;
+  outline: none;
+  transition: v.$transition-base;
+
+  &::placeholder {
+    color: v.$text-secondary;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: v.$brand;
+    box-shadow: 0 0 0 3px rgba(v.$brand, 0.12);
+  }
+
+  &.error {
+    border-color: v.$danger;
+    box-shadow: 0 0 0 3px rgba(v.$danger, 0.1);
+  }
+}
+
+// ── Truncate single line ─────────────────────────────────────────────────────
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ── Flex center ──────────────────────────────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ── Responsive breakpoint helpers ───────────────────────────────────────────
+@mixin sm { @media (min-width: v.$breakpoint-sm) { @content; } }
+@mixin md { @media (min-width: v.$breakpoint-md) { @content; } }
+@mixin lg { @media (min-width: v.$breakpoint-lg) { @content; } }
+@mixin xl { @media (min-width: v.$breakpoint-xl) { @content; } }
