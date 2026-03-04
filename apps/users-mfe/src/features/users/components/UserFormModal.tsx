@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useUsersStore } from '../store/usersStore'
 import type { User } from '../types'
+import styles from './UserFormModal.module.scss'
 
 interface Props {
   open: boolean
@@ -117,7 +118,7 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
     <AnimatePresence>
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className={styles.overlay}
           role="dialog"
           aria-modal="true"
           aria-label={editUser ? 'Editar usuario' : 'Nuevo usuario'}
@@ -127,7 +128,7 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className={styles.backdrop}
             onClick={onClose}
           />
 
@@ -137,38 +138,33 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ duration: 0.22 }}
-            className="relative bg-surface rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
+            className={styles.panel}
           >
             {/* Header */}
-            <div className="px-6 py-5 flex items-center justify-between" style={{ background: 'linear-gradient(135deg, #1400CC 0%, #2a1de8 100%)' }}>
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+            <div className={styles.panelHeader}>
+              <div className={styles.panelHeaderLeft}>
+                <div className={styles.panelIconWrap}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD400" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                     <circle cx="12" cy="7" r="4" />
                   </svg>
                 </div>
-                <h2 className="font-display font-bold text-white text-lg leading-none">
+                <h2 className={styles.panelTitle}>
                   {editUser ? 'Editar Usuario' : 'Nuevo Usuario'}
                 </h2>
               </div>
-              <button
-                onClick={onClose}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
-              >
-                ✕
-              </button>
+              <button onClick={onClose} className={styles.closeBtn}>✕</button>
             </div>
 
             {/* Accent bar */}
-            <div className="h-1 bg-accent" />
+            <div className={styles.accentBar} />
 
             {/* Form */}
-            <form onSubmit={handleSubmit} noValidate className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} noValidate className={styles.form}>
+              <div className={styles.twoCol}>
                 <Field label="Nombre" error={errors.firstName}>
                   <input
-                    className={inputCls(!!errors.firstName)}
+                    className={errors.firstName ? styles.inputError : styles.input}
                     placeholder="Carlos"
                     value={form.firstName}
                     onChange={set('firstName')}
@@ -176,7 +172,7 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
                 </Field>
                 <Field label="Apellido" error={errors.lastName}>
                   <input
-                    className={inputCls(!!errors.lastName)}
+                    className={errors.lastName ? styles.inputError : styles.input}
                     placeholder="García"
                     value={form.lastName}
                     onChange={set('lastName')}
@@ -187,17 +183,17 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
               <Field label="Correo electrónico" error={errors.email}>
                 <input
                   type="email"
-                  className={inputCls(!!errors.email)}
+                  className={errors.email ? styles.inputError : styles.input}
                   placeholder="carlos@example.com"
                   value={form.email}
                   onChange={set('email')}
                 />
               </Field>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className={styles.twoCol}>
                 <Field label="Teléfono" error={errors.phone}>
                   <input
-                    className={inputCls(!!errors.phone)}
+                    className={errors.phone ? styles.inputError : styles.input}
                     placeholder="+57 310 987 6543"
                     value={form.phone}
                     onChange={set('phone')}
@@ -206,7 +202,7 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
                 <Field label="Fecha de nacimiento" error={errors.dob}>
                   <input
                     type="date"
-                    className={inputCls(!!errors.dob)}
+                    className={errors.dob ? styles.inputError : styles.input}
                     value={form.dob}
                     onChange={set('dob')}
                   />
@@ -214,26 +210,18 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
               </div>
 
               <Field label="Género">
-                <select className={inputCls(false)} value={form.gender} onChange={set('gender')}>
+                <select className={styles.input} value={form.gender} onChange={set('gender')}>
                   <option value="male">Masculino</option>
                   <option value="female">Femenino</option>
                 </select>
               </Field>
 
               {/* Actions */}
-              <div className="flex justify-end gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold font-body text-text-secondary border border-border hover:bg-surface-2 transition-colors"
-                >
+              <div className={styles.actions}>
+                <button type="button" onClick={onClose} className={styles.btnCancel}>
                   Cancelar
                 </button>
-                <button
-                  type="submit"
-                  className="px-6 py-2.5 rounded-xl text-sm font-semibold font-body text-white shadow-md hover:opacity-90 transition-opacity"
-                  style={{ background: 'linear-gradient(135deg, #1400CC 0%, #2a1de8 100%)' }}
-                >
+                <button type="submit" className={styles.btnSubmit}>
                   {editUser ? 'Guardar cambios' : 'Crear usuario'}
                 </button>
               </div>
@@ -243,10 +231,6 @@ export default function UserFormModal({ open, editUser, onClose }: Props) {
       )}
     </AnimatePresence>
   )
-}
-
-function inputCls(hasError: boolean) {
-  return `w-full bg-white border ${hasError ? 'border-red-400 focus:ring-red-200' : 'border-border focus:border-brand focus:ring-brand/20'} rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 transition-all font-body`
 }
 
 function Field({
@@ -259,12 +243,10 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <div>
-      <label className="block text-xs font-semibold text-text-secondary font-body mb-1.5 uppercase tracking-wide">
-        {label}
-      </label>
+    <div className={styles.field}>
+      <label className={styles.label}>{label}</label>
       {children}
-      {error && <p className="text-red-500 text-xs mt-1 font-body">{error}</p>}
+      {error && <p className={styles.errorMsg}>{error}</p>}
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import type { User } from '../types'
+import styles from './UserDetailView.module.scss'
 
 interface InfoItem {
   label: string
@@ -15,18 +16,21 @@ function InfoCard({
   items: InfoItem[]
 }) {
   return (
-    <div className="bg-surface rounded-2xl border border-border shadow-sm overflow-hidden">
-      <div className="h-1 bg-brand" />
-      <div className="p-5">
-        <h3 className="font-display font-bold text-sm text-text-primary mb-4">{title}</h3>
-        <ul className="space-y-3">
+    <div className={styles.infoCard}>
+      <div className={styles.infoCardBar} />
+      <div className={styles.infoCardBody}>
+        <h3 className={styles.infoCardTitle}>{title}</h3>
+        <ul className={styles.infoItemList}>
           {items.map(({ label, value, accent, mono }) => (
-            <li key={label} className="bg-white rounded-xl border border-border px-4 py-3">
-              <p className="text-[10px] font-semibold text-text-secondary font-body uppercase tracking-wide mb-1">{label}</p>
+            <li key={label} className={styles.infoItem}>
+              <p className={styles.infoItemLabel}>{label}</p>
               <p
-                className={`text-sm font-body break-all ${
-                  accent ? 'text-brand font-semibold' : mono ? 'text-text-secondary font-mono text-[11px]' : 'text-text-primary'
-                }`}
+                className={[
+                  styles.infoItemValue,
+                  accent ? styles.accent : mono ? styles.mono : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
               >
                 {value}
               </p>
@@ -51,14 +55,11 @@ export default function UserDetailView({ user, onBack }: { user: User; onBack: (
 
   return (
     <div>
-      <div
-        className="pt-8 pb-16 px-6 relative"
-        style={{ background: 'linear-gradient(135deg, #1400CC 0%, #2a1de8 100%)' }}
-      >
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-accent" />
-        <div className="mx-auto max-w-5xl flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+      <div className={styles.heroHeader}>
+        <div className={styles.accentBar} />
+        <div className={styles.headerInner}>
+          <div className={styles.headerLeft}>
+            <div className={styles.headerIconWrap}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFD400" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
@@ -66,12 +67,9 @@ export default function UserDetailView({ user, onBack }: { user: User; onBack: (
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             </div>
-            <h1 className="font-display font-bold text-white text-xl">Perfil de Usuario</h1>
+            <h1 className={styles.headerTitle}>Perfil de Usuario</h1>
           </div>
-          <button
-            onClick={onBack}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-brand text-sm font-semibold font-body hover:bg-white/90 transition-colors shadow-md"
-          >
+          <button onClick={onBack} className={styles.backBtn}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5M12 5l-7 7 7 7" />
             </svg>
@@ -80,18 +78,18 @@ export default function UserDetailView({ user, onBack }: { user: User; onBack: (
         </div>
       </div>
 
-      <div className="mx-auto max-w-5xl px-6 -mt-16 pb-16">
-        <div className="relative z-10 bg-surface rounded-2xl border border-border shadow-md p-6 mb-6 flex items-center gap-5">
-          <div className="w-20 h-20 rounded-full overflow-hidden ring-4 ring-brand/20 shadow-md shrink-0">
-            <img src={user.picture.large} alt={fullName} className="w-full h-full object-cover" />
+      <div className={styles.content}>
+        <div className={styles.profileCard}>
+          <div className={styles.profileAvatar}>
+            <img src={user.picture.large} alt={fullName} className={styles.profileAvatarImg} />
           </div>
           <div>
-            <h2 className="font-display font-bold text-2xl text-text-primary leading-none">{fullName}</h2>
-            <p className="text-text-secondary text-sm font-body mt-1.5">{user.dob?.age} años</p>
+            <h2 className={styles.profileName}>{fullName}</h2>
+            <p className={styles.profileAge}>{user.dob?.age} años</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className={styles.infoGrid}>
           <InfoCard
             title="Información de Contacto"
             items={[

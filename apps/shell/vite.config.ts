@@ -10,6 +10,7 @@ export default defineConfig({
       name: 'shell',
       remotes: {
         usersMfe: 'http://localhost:5174/assets/remoteEntry.js',
+        countriesMfe: 'http://localhost:5175/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),

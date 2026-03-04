@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { useUsersStore } from '../store/usersStore'
+import styles from './Pagination.module.scss'
 
 interface Props {
   totalPages: number
@@ -16,66 +17,46 @@ export default function Pagination({ totalPages, total }: Props) {
   const pages = buildPageRange(page, totalPages)
 
   return (
-    <div className="flex flex-col items-center gap-4 mt-10">
-      <p className="text-text-secondary text-xs font-body">
+    <div className={styles.root}>
+      <p className={styles.summary}>
         Mostrando{' '}
-        <span className="text-brand font-semibold">
-          {start}–{end}
-        </span>{' '}
-        de <span className="text-text-primary font-semibold">{total}</span> personas
+        <span className={styles.summaryHighlight}>{start}–{end}</span>{' '}
+        de <span className={styles.summaryTotal}>{total}</span> personas
       </p>
-      <nav className="flex items-center gap-1.5" aria-label="Paginación">
-        <PageBtn onClick={() => setPage(page - 1)} disabled={page === 1}>
+      <nav className={styles.nav} aria-label="Paginación">
+        <button
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+          className={styles.prevNextBtn}
+        >
           ←
-        </PageBtn>
+        </button>
         {pages.map((p, i) =>
           p === '…' ? (
-            <span key={`ellipsis-${i}`} className="text-text-secondary px-1 text-sm">
-              …
-            </span>
+            <span key={`ellipsis-${i}`} className={styles.ellipsis}>…</span>
           ) : (
             <motion.button
               key={p}
               onClick={() => setPage(p as number)}
               whileTap={{ scale: 0.88 }}
-              className={`w-9 h-9 rounded-xl text-xs font-display font-semibold transition-all ${
-                p === page
-                  ? 'bg-brand text-white shadow-md'
-                  : 'text-text-secondary border border-border bg-white hover:border-brand hover:text-brand'
-              }`}
+              className={`${styles.pageBtn}${p === page ? ` ${styles.active}` : ''}`}
             >
               {p}
             </motion.button>
           ),
         )}
-        <PageBtn onClick={() => setPage(page + 1)} disabled={page === totalPages}>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+          className={styles.prevNextBtn}
+        >
           →
-        </PageBtn>
+        </button>
       </nav>
 
       {/* Domina-style yellow accent bar under pagination */}
-      <div className="w-16 h-0.5 bg-accent rounded-full" />
+      <div className={styles.accent} />
     </div>
-  )
-}
-
-function PageBtn({
-  children,
-  onClick,
-  disabled,
-}: {
-  children: React.ReactNode
-  onClick: () => void
-  disabled: boolean
-}) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className="px-3 h-9 rounded-xl text-sm font-body text-text-secondary border border-border bg-white hover:border-brand hover:text-brand disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-    >
-      {children}
-    </button>
   )
 }
 
