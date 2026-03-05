@@ -21,3 +21,33 @@ declare module 'usersMfe/UsersFeature' {
   const UsersFeature: ComponentType<UsersFeatureProps>
   export default UsersFeature
 }
+
+declare module 'countriesMfe/CountriesFeature' {
+  import type { ComponentType } from 'react'
+
+  export interface Continent {
+    name: string
+  }
+
+  export interface Language {
+    name: string
+  }
+
+  export interface Country {
+    code: string
+    name: string
+    capital: string | null
+    currency: string | null
+    emoji: string
+    phone: string
+    continent: Continent
+    languages: Language[]
+  }
+
+  export interface CountriesFeatureProps {
+    onCountrySelect?: (country: Country) => void
+  }
+
+  const CountriesFeature: ComponentType<CountriesFeatureProps>
+  export default CountriesFeature
+}

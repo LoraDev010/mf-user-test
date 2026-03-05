@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useUsersStore } from '../store/usersStore'
 import { useDebounce } from '@/shared/hooks/useDebounce'
+import styles from './UserSearch.module.scss'
 
 export default function UserSearch() {
   const setSearch = useUsersStore((s) => s.setSearch)
@@ -12,9 +13,9 @@ export default function UserSearch() {
   }, [debounced, setSearch])
 
   return (
-    <div className="relative">
+    <div className={styles.wrap}>
       <svg
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-brand w-4 h-4 pointer-events-none"
+        className={styles.icon}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -32,7 +33,7 @@ export default function UserSearch() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Buscar por nombre, correo o país…"
-        className="w-full bg-white border border-border rounded-xl pl-11 pr-4 py-3.5 text-sm text-text-primary placeholder-text-secondary focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all font-body shadow-sm"
+        className={styles.input}
         aria-label="Buscar personas"
       />
     </div>

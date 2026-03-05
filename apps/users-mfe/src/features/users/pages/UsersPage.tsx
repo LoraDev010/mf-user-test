@@ -5,6 +5,7 @@ import UserList from '../components/UserList'
 import Pagination from '../components/Pagination'
 import UserFormModal from '../components/UserFormModal'
 import type { User } from '../types'
+import styles from './UsersPage.module.scss'
 
 interface Props {
   onUserSelect?: (user: User) => void
@@ -31,16 +32,14 @@ export default function UsersPage({ onUserSelect }: Props) {
   }
 
   return (
-    <div className="space-y-5">
+    <div className={styles.root}>
       {/* Search bar */}
-      <div className="flex items-center gap-4">
-        <div className="flex-1">
+      <div className={styles.searchRow}>
+        <div className={styles.searchWrap}>
           <UserSearch />
         </div>
         {isFetching && (
-          <span className="text-xs text-text-secondary font-body animate-pulse shrink-0">
-            Syncing…
-          </span>
+          <span className={styles.syncing}>Syncing…</span>
         )}
       </div>
 
