@@ -50,6 +50,7 @@ export default function UserDetailView({ user, onBack }: { user: User; onBack: (
         day: 'numeric',
         month: 'long',
         year: 'numeric',
+        timeZone: 'UTC',
       })
     : '—'
 

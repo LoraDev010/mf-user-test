@@ -23,6 +23,7 @@ export default function UserCard({ user, index, onSelect, onEdit, isLocal }: Pro
         day: 'numeric',
         month: 'numeric',
         year: 'numeric',
+        timeZone: 'UTC',
       })
     : '—'
 
