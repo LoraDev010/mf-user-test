@@ -54,7 +54,7 @@ export default function Pagination({ totalPages, total }: Props) {
         </button>
       </nav>
 
-      {/* Domina-style yellow accent bar under pagination */}
+      {/* Andres Lora S.A.S-style yellow accent bar under pagination */}
       <div className={styles.accent} />
     </div>
   )

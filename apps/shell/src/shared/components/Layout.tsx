@@ -52,7 +52,7 @@ export default function Layout({ children }: Props) {
               </svg>
             </span>
             <span className="font-display font-bold text-xl tracking-tight text-brand">
-              Domina<span className="text-text-secondary font-normal text-sm ml-1.5">People</span>
+              Andres Lora S.A.S<span className="text-text-secondary font-normal text-sm ml-1.5">People</span>
             </span>
           </Link>
 

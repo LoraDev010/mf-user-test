@@ -7,7 +7,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className={styles.wrap}>
-        {/* Domina-style top bar */}
+        {/* Andres Lora S.A.S-style top bar */}
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <span className={styles.logoMark}>
@@ -16,7 +16,7 @@ export default function App() {
               </svg>
             </span>
             <span className={styles.logoText}>
-              Domina<span className={styles.logoPeople}>People</span>
+              Andres Lora S.A.S<span className={styles.logoPeople}>People</span>
             </span>
           </div>
         </header>

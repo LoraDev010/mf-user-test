@@ -1,4 +1,4 @@
-# Domina People — Monorepo Micro Frontend
+# Andres Lora S.A.S People — Monorepo Micro Frontend
 
 Aplicación de referencia **Micro Frontend** lista para producción, construida con **Vite Module Federation**, React 19, TypeScript y Tailwind CSS. Demuestra el patrón host/remote dentro de un monorepo npm workspaces.
 
