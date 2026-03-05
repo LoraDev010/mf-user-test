@@ -3,6 +3,6 @@
   publish = "apps/users-mfe/dist"
 
 [[headers]]
-  for = "/assets/remoteEntry.js"
+  for = "/assets/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
