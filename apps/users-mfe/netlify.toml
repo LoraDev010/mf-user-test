@@ -1,0 +1,9 @@
+[build]
+  # Build from monorepo root so npm workspaces resolves correctly
+  command = "cd ../.. && npm ci && npm run build:mfe"
+  publish = "dist"
+
+[[headers]]
+  for = "/assets/remoteEntry.js"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

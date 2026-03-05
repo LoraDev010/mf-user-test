@@ -9,8 +9,8 @@ export default defineConfig({
     federation({
       name: 'shell',
       remotes: {
-        usersMfe: 'http://localhost:5174/assets/remoteEntry.js',
-        countriesMfe: 'http://localhost:5175/assets/remoteEntry.js',
+        usersMfe: `${process.env.VITE_USERS_MFE_URL ?? 'http://localhost:5174'}/assets/remoteEntry.js`,
+        countriesMfe: `${process.env.VITE_COUNTRIES_MFE_URL ?? 'http://localhost:5175'}/assets/remoteEntry.js`,
       },
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),

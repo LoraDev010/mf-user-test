@@ -1,0 +1,8 @@
+[build]
+  command = "cd ../.. && npm ci && npm run build:countries"
+  publish = "dist"
+
+[[headers]]
+  for = "/assets/remoteEntry.js"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

@@ -34,3 +34,6 @@ echo "=== Server URLs ==="
 grep "Local:" /tmp/mfe.log /tmp/ctr.log /tmp/sh.log 2>/dev/null || echo "Some servers may still be starting..."
 echo ""
 echo "Open: http://localhost:5173"
+
+# Keep container alive (wait for background processes)
+wait
