@@ -59,7 +59,7 @@ export default function CountriesPage({ onCountrySelect }: Props) {
         </div>
         <div className={styles.heroWave}>
           <svg viewBox="0 0 1440 64" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0 64H1440V32C1200 64 960 64 720 32C480 0 240 0 0 32V64Z" fill="white" />
+            <path d="M0 64H1440V32C1200 64 960 64 720 32C480 0 240 0 0 32V64Z" fill="#f0f2f8" />
           </svg>
         </div>
       </div>
