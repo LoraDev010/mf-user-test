@@ -1,6 +1,6 @@
 [build]
-  command = "cd ../.. && npm ci && npm run build:shell"
-  publish = "dist"
+  command = "npm ci && npm run build:shell"
+  publish = "apps/shell/dist"
 
 # SPA redirect: send all routes to index.html
 [[redirects]]
