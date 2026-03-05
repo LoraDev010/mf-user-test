@@ -31,6 +31,7 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    minify: 'esbuild',
+    modulePreload: false,
+    minify: false,
   },
 })
