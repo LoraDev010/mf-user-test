@@ -251,6 +251,6 @@ Cada app contiene un `netlify.toml` con:
 
 ### URLs de producción
 
-- Shell: https://mf-shell-fd.netlify.app
+- Shell: hhttps://servicio-logistica.netlify.app
 - Users MFE: https://mf-users-mfe.netlify.app
 - Countries MFE: https://mf-countries-mfe.netlify.app

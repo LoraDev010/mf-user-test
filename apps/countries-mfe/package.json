@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --port 5175 --host 0.0.0.0",
     "build": "tsc -b --noEmit && vite build",
-    "preview": "vite preview --port 5175 --host 0.0.0.0"
+    "preview": "vite preview --port 5175 --host 0.0.0.0",
+    "test": "jest --config test/jest.config.cjs --coverage",
+    "test:ci": "jest --config test/jest.config.cjs --coverage --coverageThreshold='{\"global\":{\"branches\":90,\"functions\":90,\"lines\":90,\"statements\":90}}'"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.67.2",
