@@ -14,6 +14,7 @@ import React from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/shared/lib/queryClient'
 import UsersPage from './pages/UsersPage'
+import UserDetailPage from './pages/UserDetailPage'
 import type { User } from './types'
 
 export type { User }
@@ -22,9 +23,20 @@ export interface UsersFeatureProps {
   onUserSelect?: (user: User) => void
 }
 
+export interface UserDetailProps {
+  user: User
+  onBack?: () => void
+}
+
 const UsersFeature: React.FC<UsersFeatureProps> = ({ onUserSelect }) => (
   <QueryClientProvider client={queryClient}>
     <UsersPage onUserSelect={onUserSelect} />
+  </QueryClientProvider>
+)
+
+export const UserDetail: React.FC<UserDetailProps> = ({ user, onBack }) => (
+  <QueryClientProvider client={queryClient}>
+    <UserDetailPage user={user} onBack={onBack} />
   </QueryClientProvider>
 )
 

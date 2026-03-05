@@ -22,6 +22,18 @@ declare module 'usersMfe/UsersFeature' {
   export default UsersFeature
 }
 
+declare module 'usersMfe/UserDetail' {
+  import type { ComponentType } from 'react'
+  import type { User } from 'usersMfe/UsersFeature'
+
+  export interface UserDetailProps {
+    user: User
+    onBack?: () => void
+  }
+
+  export const UserDetail: ComponentType<UserDetailProps>
+}
+
 declare module 'countriesMfe/CountriesFeature' {
   import type { ComponentType } from 'react'
 

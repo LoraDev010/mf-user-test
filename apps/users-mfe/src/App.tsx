@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/shared/lib/queryClient'
 import UsersPage from '@/features/users/pages/UsersPage'
-import UserDetailView from '@/features/users/components/UserDetailView'
+import UserDetailPage from '@/features/users/pages/UserDetailPage'
 import type { User } from '@/features/users/types'
 import styles from './App.module.scss'
 
@@ -32,7 +32,7 @@ export default function App() {
         </header>
 
         {selectedUser ? (
-          <UserDetailView user={selectedUser} onBack={() => setSelectedUser(null)} />
+          <UserDetailPage user={selectedUser} onBack={() => setSelectedUser(null)} />
         ) : (
           <>
             {/* Hero */}

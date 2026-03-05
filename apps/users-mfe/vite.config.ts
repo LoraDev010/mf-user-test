@@ -11,12 +11,16 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './UsersFeature': './src/features/users/index.tsx',
+        './UserDetail': './src/features/users/index.tsx',
       },
       shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
   resolve: {
-    alias: { '@': resolve(__dirname, 'src') },
+    alias: { 
+      '@': resolve(__dirname, 'src'),
+      '@shared': resolve(__dirname, '../../shared')
+    },
   },
   css: {
     preprocessorOptions: {
