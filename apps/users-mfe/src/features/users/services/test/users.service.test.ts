@@ -37,7 +37,7 @@ describe('fetchUsers', () => {
   it('uses default seed and results when options are omitted', async () => {
     mockHttpGet.mockResolvedValue({ results: [], info: {} } as unknown as RandomUserResponse)
     await fetchUsers()
-    expect(mockHttpGet).toHaveBeenCalledWith({ seed: 'peoplexplorer', results: 100 })
+    expect(mockHttpGet).toHaveBeenCalledWith({ seed: 'Portal Domina', results: 100 })
   })
 
   it('propagates httpGet errors', async () => {

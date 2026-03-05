@@ -7,7 +7,7 @@ interface FetchUsersOptions {
 }
 
 export async function fetchUsers(options: FetchUsersOptions = {}): Promise<User[]> {
-  const { seed = 'peoplexplorer', results = 100 } = options
+  const { seed = 'Portal Domina', results = 100 } = options
   const data = await httpGet<RandomUserResponse>({ seed, results })
   return data.results
 }

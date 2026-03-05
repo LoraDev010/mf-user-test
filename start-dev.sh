@@ -2,7 +2,7 @@
 # Start all MFE dev servers
 # MFEs use vite build + vite preview (required for @originjs/vite-plugin-federation)
 # Shell uses vite dev
-set -e
+set -euo pipefail
 cd /var/www/mf-user-test
 
 # Kill any leftover vite processes
