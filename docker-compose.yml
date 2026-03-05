@@ -6,13 +6,12 @@ services:
       - "5174:5174"
       - "5175:5175"
     volumes:
-      # Mount source code for live editing
       - .:/var/www/mf-user-test
-      # Keep container's node_modules (avoid Windows path issues)
       - nm_root:/var/www/mf-user-test/node_modules
       - nm_shell:/var/www/mf-user-test/apps/shell/node_modules
       - nm_users:/var/www/mf-user-test/apps/users-mfe/node_modules
       - nm_countries:/var/www/mf-user-test/apps/countries-mfe/node_modules
+    entrypoint: ["bash", "-c", "sed -i 's/\\r//' /var/www/mf-user-test/start-dev.sh && bash /var/www/mf-user-test/start-dev.sh"]
     stdin_open: true
     tty: true
 
